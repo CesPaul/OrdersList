@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 
 class App : Application() {
 
@@ -31,6 +32,8 @@ class App : Application() {
             .build()
 
         ordersApi = retrofit.create(OrdersApi::class.java)
+
+        Timber.plant(Timber.DebugTree())
     }
 
     companion object {

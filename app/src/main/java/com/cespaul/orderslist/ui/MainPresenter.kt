@@ -1,6 +1,5 @@
 package com.cespaul.orderslist.ui
 
-import android.util.Log
 import com.cespaul.orderslist.App
 import com.cespaul.orderslist.base.BasePresenter
 import com.cespaul.orderslist.data.repository.OrdersRepository
@@ -9,6 +8,7 @@ import com.cespaul.orderslist.utils.PRIVATE_KEY
 import com.cespaul.orderslist.utils.PUBLIC_KEY
 import com.google.common.hash.Hashing
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 import java.nio.charset.Charset
 
 class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
@@ -36,29 +36,35 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
             .subscribe(
                 {
                     oAuthRequest = it.RequestToken
-                    Log.d("get_orders", "success request")
+                    Timber.tag("get_orders").d("success request")
                     access = getAccess()
                 },
                 {
                     view.visibilityProgressBar(false)
-                    Log.d("get_orders", "error request")
+                    Timber.tag("get_orders").d("error request")
                 }
             )
     }
 
     private fun getAccess(): Disposable? {
-        val pass = Hashing.sha1().hashString(oAuthRequest + PRIVATE_KEY, Charset.defaultCharset())
+        @Suppress("UnstableApiUsage", "DEPRECATION")
+        val pass = Hashing
+            .sha1()
+            .hashString(
+                oAuthRequest + PRIVATE_KEY,
+                Charset.defaultCharset()
+            )
             .toString()
         return repository
             .getAccess(oAuthRequest, PUBLIC_KEY, pass)
             .subscribe(
                 {
                     oAuthAccess = it.AccessToken
-                    Log.d("get_orders", "success access")
+                    Timber.tag("get_orders").d("success access")
                     orders = getOrders()
                 },
                 {
-                    Log.d("get_orders", "error access")
+                    Timber.tag("get_orders").d("error access")
                 }
             )
     }
@@ -70,10 +76,10 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                 {
                     view.visibilityProgressBar(false)
                     adapter.updateList(it)
-                    Log.d("get_orders", "success")
+                    Timber.tag("get_orders").d("success")
                 },
                 {
-                    Log.d("get_orders", "error get")
+                    Timber.tag("get_orders").d("error get")
                 }
             )
     }

@@ -27,6 +27,3 @@ fabric.properties
 
 # Json Release output file
 output.json
-
-# Secret
-keystore.properties

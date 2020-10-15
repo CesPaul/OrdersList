@@ -1,11 +1,10 @@
 package com.cespaul.orderslist.utils
 
-import com.cespaul.orderslist.BuildConfig
 
 const val BASE_URL: String = "https://api.pixlpark.com/"
 
 const val GRANT_TYPE: String = "api"
 
-const val PRIVATE_KEY = BuildConfig.PRIVATE_KEY
+const val PUBLIC_KEY = "38cd79b5f2b2486d86f562e3c43034f8"
 
-const val PUBLIC_KEY = BuildConfig.PUBLIC_KEY
+const val PRIVATE_KEY = "8e49ff607b1f46e1a5e8f6ad5d312a80"
