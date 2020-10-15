@@ -6,6 +6,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
 
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
     defaultConfig {
         applicationId "com.cespaul.orderslist"
         minSdkVersion 21
@@ -14,6 +18,9 @@ android {
         versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "PUBLIC_KEY", keystoreProperties["PUBLIC_KEY"]
+        buildConfigField "String", "PRIVATE_KEY", keystoreProperties["PRIVATE_KEY"]
     }
 
     compileOptions {
@@ -22,6 +29,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -55,5 +66,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation("com.google.guava:guava:29.0-android")
 
 }
