@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">OrdersList</string>
 
+    <string name="error_load_orders">Ошибка загрузки</string>
+    <string name="retry_load_button">Повторить</string>
+
     <string name="customId">Заказ №%1$s</string>
     <string name="paymentStatus">Оплата: %1$s</string>
     <string name="fullName">Клиент: %1$s</string>
     <string name="phone">Телефон: %1$s</string>
     <string name="titleShipping">Доставка: %1$s</string>
     <string name="phoneShipping">Телефон: %1$s</string>
-    <string name="emailShipping">email: %1$s</string>
+    <string name="emailShipping" translatable="false">email: %1$s</string>
     <string name="dateCreated">Создан: %1$s</string>
     <string name="dateModified">Изменён: %1$s</string>
     <string name="datePaid">Оплачен: %1$s</string>

@@ -6,5 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 interface MainView : BaseView {
     fun initSnackbar(message: String, isIndefiniteLength: Boolean): Snackbar
 
+    fun showErrorMessage()
+
     fun visibilityProgressBar(isVisible: Boolean)
 }

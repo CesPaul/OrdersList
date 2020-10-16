@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OrdersList</string>
+    <string name="error_load_orders">Error load</string>
+    <string name="retry_load_button">Retry</string>
+    <string name="customId">Order #%1$s</string>
+    <string name="paymentStatus">Pay: %1$s</string>
+    <string name="fullName">Customer: %1$s</string>
+    <string name="phone">Phone: %1$s</string>
+    <string name="titleShipping">Shipping: %1$s</string>
+    <string name="phoneShipping">Phone: %1$s</string>
+    <string name="dateCreated">Created: %1$s</string>
+    <string name="dateModified">Modified: %1$s</string>
+    <string name="datePaid">Paid: %1$s</string>
+    <string name="price">Price: %1$s</string>
+    <string name="discountPrice">Discount: %1$s</string>
+    <string name="deliveryPrice">Delivery price: %1$s</string>
+    <string name="totalPrice">Total: %1$s</string>
+</resources>

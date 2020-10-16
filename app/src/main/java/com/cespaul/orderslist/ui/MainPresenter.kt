@@ -41,6 +41,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                 },
                 {
                     view.visibilityProgressBar(false)
+                    view.showErrorMessage()
                     Timber.tag("get_orders").d("error request")
                 }
             )
@@ -64,6 +65,8 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                     orders = getOrders()
                 },
                 {
+                    view.visibilityProgressBar(false)
+                    view.showErrorMessage()
                     Timber.tag("get_orders").d("error access")
                 }
             )
@@ -79,9 +82,15 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                     Timber.tag("get_orders").d("success")
                 },
                 {
+                    view.visibilityProgressBar(false)
+                    view.showErrorMessage()
                     Timber.tag("get_orders").d("error get")
                 }
             )
+    }
+
+    fun onReload() {
+        request = getRequest()
     }
 
     override fun onViewCreated() {

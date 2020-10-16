@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
+    private lateinit var snackbar: Snackbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +29,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         )
         recycler.addItemDecoration(dividerItemDecoration)
 
+        snackbar = initSnackbar("", false)
+
         presenter.onViewCreated()
     }
 
@@ -41,13 +45,23 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
                 main_constraint,
                 message,
                 Snackbar.LENGTH_INDEFINITE
-            ).setAnchorView(main_constraint)
+            )
             false -> Snackbar.make(
                 main_constraint,
                 message,
                 Snackbar.LENGTH_LONG
-            ).setAnchorView(main_constraint)
+            )
         }
+    }
+
+    override fun showErrorMessage() {
+        snackbar = initSnackbar(getString(R.string.error_load_orders), true)
+        snackbar.setAction(
+            getString(R.string.retry_load_button)
+        ) {
+            presenter.onReload()
+        }
+        snackbar.show()
     }
 
     override fun visibilityProgressBar(isVisible: Boolean) {
