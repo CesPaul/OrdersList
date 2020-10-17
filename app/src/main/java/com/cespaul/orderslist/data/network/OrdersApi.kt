@@ -21,6 +21,7 @@ interface OrdersApi {
 
     @GET("orders")
     fun getOrders(
-        @Query("oauth_token") oauth_token: String
+        @Query("oauth_token") oauth_token: String,
+        @Query("take") take: Int
     ): Observable<Orders>
 }
