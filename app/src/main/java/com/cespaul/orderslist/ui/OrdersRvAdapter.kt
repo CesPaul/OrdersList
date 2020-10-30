@@ -36,7 +36,7 @@ class OrdersRvAdapter(
     }
 
     fun updateList(orders: Orders) {
-        this.ordersList = orders.Result
+        this.ordersList = orders.result
         notifyDataSetChanged()
     }
 

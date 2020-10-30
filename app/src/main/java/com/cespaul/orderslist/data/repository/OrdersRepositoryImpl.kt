@@ -38,5 +38,4 @@ class OrdersRepositoryImpl(private val ordersApi: OrdersApi) : OrdersRepository 
     override fun getOrders(): Orders {
         return Orders(ordersList)
     }
-
 }

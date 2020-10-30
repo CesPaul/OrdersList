@@ -35,7 +35,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
             .getRequest()
             .subscribe(
                 {
-                    oAuthRequest = it.RequestToken
+                    oAuthRequest = it.requestToken
                     Timber.tag("get_orders").d("success request")
                     access = getAccess()
                 },
@@ -60,7 +60,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
             .getAccess(oAuthRequest, PUBLIC_KEY, pass)
             .subscribe(
                 {
-                    oAuthAccess = it.AccessToken
+                    oAuthAccess = it.accessToken
                     Timber.tag("get_orders").d("success access")
                     orders = getOrders()
                 },
@@ -84,7 +84,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                 {
                     view.visibilityProgressBar(false)
                     view.showErrorMessage()
-                    Timber.tag("get_orders").d("error get")
+                    Timber.tag("get_orders").d("error get $it")
                 }
             )
     }
