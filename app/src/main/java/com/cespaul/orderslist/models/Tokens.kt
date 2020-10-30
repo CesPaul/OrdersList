@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Tokens(
     @SerializedName("RequestToken")
-    val RequestToken: String = "",
+    val requestToken: String = "",
 
     @SerializedName("AccessToken")
-    val AccessToken: String = ""
+    val accessToken: String = ""
 )
