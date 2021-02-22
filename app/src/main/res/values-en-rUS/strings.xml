@@ -16,4 +16,5 @@
     <string name="discountPrice">Discount: %1$s</string>
     <string name="deliveryPrice">Delivery price: %1$s</string>
     <string name="totalPrice">Total: %1$s</string>
+    <string name="menu_orders_refresh">Меню обновления</string>
 </resources>

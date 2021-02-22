@@ -18,4 +18,5 @@
     <string name="discountPrice">Скидка: %1$s</string>
     <string name="deliveryPrice">Цена доставки: %1$s</string>
     <string name="totalPrice">Итого: %1$s</string>
+    <string name="menu_orders_refresh">Меню обновления</string>
 </resources>

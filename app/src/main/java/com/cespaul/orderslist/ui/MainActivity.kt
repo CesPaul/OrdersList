@@ -1,6 +1,8 @@
 package com.cespaul.orderslist.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         snackbar = initSnackbar("", false)
 
         presenter.onViewCreated()
+
+        swipeUpdateOrders.setOnRefreshListener {
+            swipeUpdateOrders.isRefreshing = true
+            presenter.onViewCreated()
+            snackbar.dismiss()
+            swipeUpdateOrders.isRefreshing = false
+        }
     }
 
     override fun onDestroy() {
@@ -69,6 +78,22 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             true -> progressBar.visibility = View.VISIBLE
             false -> progressBar.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.swipeUpdateOrders -> {
+                swipeUpdateOrders.isRefreshing = true
+
+                presenter.onReload()
+                snackbar.dismiss()
+                swipeUpdateOrders.isRefreshing = false
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun instantiatePresenter(): MainPresenter {
