@@ -7,10 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeUpdateOrders"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_orders"
@@ -19,15 +28,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
+            app:layout_constraintTop_toBottomOf="parent"
             tools:itemCount="14"
             tools:listitem="@layout/support_simple_spinner_dropdown_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
 
     <ProgressBar
         android:id="@+id/progressBar"

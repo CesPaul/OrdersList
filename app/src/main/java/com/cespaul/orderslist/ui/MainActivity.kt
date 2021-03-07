@@ -1,7 +1,6 @@
 package com.cespaul.orderslist.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -37,9 +36,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
         swipeUpdateOrders.setOnRefreshListener {
             swipeUpdateOrders.isRefreshing = true
-            presenter.onViewCreated()
+            presenter.onReload()
             snackbar.dismiss()
-            swipeUpdateOrders.isRefreshing = false
         }
     }
 
@@ -78,6 +76,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             true -> progressBar.visibility = View.VISIBLE
             false -> progressBar.visibility = View.INVISIBLE
         }
+    }
+
+    override fun refreshingSwipe(isRefreshing: Boolean) {
+        swipeUpdateOrders.isRefreshing = isRefreshing
+    }
+
+    override fun isRefreshingSwipeProgressBar(): Boolean {
+        return swipeUpdateOrders.isRefreshing
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

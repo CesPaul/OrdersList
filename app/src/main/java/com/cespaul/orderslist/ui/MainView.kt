@@ -9,4 +9,8 @@ interface MainView : BaseView {
     fun showErrorMessage()
 
     fun visibilityProgressBar(isVisible: Boolean)
+
+    fun refreshingSwipe(isRefreshing: Boolean)
+
+    fun isRefreshingSwipeProgressBar(): Boolean
 }

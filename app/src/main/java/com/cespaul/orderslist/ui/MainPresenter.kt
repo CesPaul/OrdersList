@@ -72,25 +72,36 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
             )
     }
 
+    private fun onLoadingRefreshState() {
+        if (!view.isRefreshingSwipeProgressBar())
+            view.visibilityProgressBar(true)
+        else
+            view.visibilityProgressBar(false)
+    }
+
     private fun getOrders(): Disposable? {
         return repository
-            .loadOrders(oAuthAccess)
-            .subscribe(
-                {
-                    view.visibilityProgressBar(false)
-                    adapter.updateList(it)
-                    Timber.tag("get_orders").d("success")
-                },
-                {
-                    view.visibilityProgressBar(false)
-                    view.showErrorMessage()
-                    Timber.tag("get_orders").d("error get $it")
-                }
-            )
+                .loadOrders(oAuthAccess)
+                .subscribe(
+                        {
+                            adapter.updateList(it)
+                            view.visibilityProgressBar(false)
+                            view.refreshingSwipe(false)
+                            Timber.tag("get_orders").d("success")
+                        },
+                        {
+                            view.showErrorMessage()
+                            view.visibilityProgressBar(false)
+                            view.refreshingSwipe(false)
+                            Timber.tag("get_orders").d("error get $it")
+
+                        }
+                )
     }
 
     fun onReload() {
-        request = getRequest()
+        onLoadingRefreshState()
+        request = getOrders()
     }
 
     override fun onViewCreated() {
