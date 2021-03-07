@@ -30,7 +30,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     )
 
     private fun getRequest(): Disposable? {
-        view.visibilityProgressBar(true)
+        onLoadingRefreshState()
         return repository
             .getRequest()
             .subscribe(
@@ -41,6 +41,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                 },
                 {
                     view.visibilityProgressBar(false)
+                    view.refreshingSwipe(false)
                     view.showErrorMessage()
                     Timber.tag("get_orders").d("error request")
                 }
@@ -66,6 +67,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
                 },
                 {
                     view.visibilityProgressBar(false)
+                    view.refreshingSwipe(false)
                     view.showErrorMessage()
                     Timber.tag("get_orders").d("error access")
                 }
@@ -100,8 +102,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     }
 
     fun onReload() {
-        onLoadingRefreshState()
-        request = getOrders()
+        request = getRequest()
     }
 
     override fun onViewCreated() {
